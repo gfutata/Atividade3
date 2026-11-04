@@ -1,0 +1,365 @@
+:root {
+    --fundo: #0f1923;
+    --superficie: #1f2933;
+    --destaque: #ff4655;
+    --texto: #ece8e1;
+    --texto-suave: #b8bfc7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fundo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Cabeçalho */
+.topo {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: rgba(15, 25, 35, 0.95);
+    border-bottom: 2px solid var(--destaque);
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--destaque);
+}
+
+.menu {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1.5rem;
+}
+
+.menu a {
+    padding: 0.4rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.menu a:hover {
+    color: var(--destaque);
+    border-color: var(--destaque);
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    min-height: 70vh;
+    padding: 4rem 8%;
+    background: linear-gradient(135deg, #0f1923 40%, #3a1218);
+    animation: aparecer 1s ease;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    color: var(--destaque);
+}
+
+.hero p {
+    max-width: 45rem;
+    font-size: 1.15rem;
+    color: var(--texto-suave);
+}
+
+.botao {
+    padding: 0.9rem 2rem;
+    background-color: var(--destaque);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+    animation: pulsar 2s infinite;
+    transition: background-color 0.3s;
+}
+
+.botao:hover {
+    background-color: #d93a49;
+}
+
+.sobre {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.sobre h2,
+.curiosidades h2 {
+    margin-bottom: 1.2rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.sobre p {
+    color: var(--texto-suave);
+}
+
+.numeros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 2rem 5%;
+    background-color: var(--superficie);
+}
+
+.numero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.numero strong {
+    font-size: 2.4rem;
+    color: var(--destaque);
+}
+
+.numero span {
+    color: var(--texto-suave);
+}
+
+/* Cards */
+.curiosidades {
+    padding: 4rem 5%;
+}
+
+.grade {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    gap: 1.5rem;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--superficie);
+    border-radius: 8px;
+    border-bottom: 4px solid var(--destaque);
+    animation: subir 0.8s ease both;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.card:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.card:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(255, 70, 85, 0.3);
+}
+
+.card img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.card:hover img {
+    transform: scale(1.08);
+}
+
+.selo {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    z-index: 2;
+    padding: 0.2rem 0.7rem;
+    background-color: var(--destaque);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.card-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.2rem;
+}
+
+.card-texto h3 {
+    font-size: 1.2rem;
+}
+
+.card-texto p {
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+}
+
+/* Rodapé */
+.rodape {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 2rem 5%;
+    text-align: center;
+    background-color: #0a1118;
+    color: var(--texto-suave);
+}
+
+.rodape a {
+    color: var(--destaque);
+    text-decoration: underline;
+}
+
+/* Botão voltar ao topo */
+.voltar {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--destaque);
+    color: #fff;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.voltar:hover {
+    transform: scale(1.15);
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes subir {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulsar {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 70, 85, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 0 12px rgba(255, 70, 85, 0);
+    }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .grade {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .numeros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Celular */
+@media (max-width: 600px) {
+    .topo {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .menu {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .grade {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 60vh;
+    }
+
+    .hero h1 {
+        font-size: 1.7rem;
+    }
+
+    .numero strong {
+        font-size: 1.8rem;
+    }
+}
