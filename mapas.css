@@ -1,0 +1,273 @@
+:root {
+  --fundo: #0f1923;
+  --painel: #17232f;
+  --linha: #2a3a49;
+  --texto: #ece8e1;
+  --texto-suave: #a9b4be;
+  --destaque: #ff4655;
+
+  --fonte-titulo: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --fonte-texto: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --largura-pagina: 1040px;
+  --largura-imagem: 380px;
+  --corte: 28px; /* tamanho do canto cortado nas imagens */
+}
+
+/*base*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: 5rem; /* evita que o header fixo cubra o destino do link */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--texto);
+  text-decoration-color: var(--destaque);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+}
+
+a:hover {
+  color: var(--destaque);
+}
+
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+}
+
+/*topo */
+
+#topo {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+  background: rgba(15, 25, 35, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--linha);
+}
+
+#topo h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* losango vermelho, referência ao logo do jogo */
+#topo h1::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--destaque);
+  transform: rotate(45deg);
+}
+
+#topo nav a {
+  font-weight: 500;
+  font-size: 0.975rem;
+}
+
+/*conteúdo*/
+
+main {
+  max-width: var(--largura-pagina);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) 2rem;
+}
+
+/* título principal da página */
+main > h1 {
+  margin: 0 0 clamp(2.5rem, 6vw, 4.5rem);
+  padding-left: 1.25rem;
+  border-left: 8px solid var(--destaque);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(3.5rem, 11vw, 7.5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* Vale para todas as <section>, com ou sem a classe .caixa */
+
+main > section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--largura-imagem));
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(1.5rem, 5vw, 3.5rem);
+  row-gap: 0.75rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem) 0;
+  border-top: 1px solid var(--linha);
+}
+
+/* o <article> dentro de Corrode some do layout para que p e img entrem no grid */
+main > section > article {
+  display: contents;
+}
+
+main > section h2 {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+main > section p {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  max-width: 60ch;
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+main > section img {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  display: block;
+  width: 100%;          /* sobrescreve o width="300" do HTML */
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--painel); /* aparece se a imagem não carregar */
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--corte)) 0,
+    100% var(--corte),
+    100% 100%,
+    0 100%
+  );
+}
+
+/* mapas pares: imagem à esquerda, texto à direita */
+main > section:nth-of-type(even) {
+  grid-template-columns: minmax(0, var(--largura-imagem)) minmax(0, 1fr);
+}
+
+main > section:nth-of-type(even) h2,
+main > section:nth-of-type(even) p {
+  grid-column: 2;
+}
+
+main > section:nth-of-type(even) img {
+  grid-column: 1;
+  clip-path: polygon(
+    var(--corte) 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 var(--corte)
+  );
+}
+
+/* ---------- rodapé ---------- */
+
+footer {
+  margin-top: 2rem;
+  padding: 2.5rem 1rem 3rem;
+  text-align: center;
+  border-top: 1px solid var(--linha);
+}
+
+footer a {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  background: var(--destaque);
+  color: var(--fundo);
+  font-weight: 500;
+  text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+footer a:hover {
+  background: var(--texto);
+  color: var(--fundo);
+}
+
+footer a:focus-visible {
+  outline-offset: 4px;
+}
+
+/*celular e tablet*/
+
+@media (max-width: 760px) {
+  main > section,
+  main > section:nth-of-type(even) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+
+  /* ordem: título, imagem, texto */
+  main > section h2,
+  main > section:nth-of-type(even) h2 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  main > section img,
+  main > section:nth-of-type(even) img {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0.5rem 0 0.75rem;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 20px) 0,
+      100% 20px,
+      100% 100%,
+      0 100%
+    );
+  }
+
+  main > section p,
+  main > section:nth-of-type(even) p {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  main > h1 {
+    border-left-width: 6px;
+    padding-left: 1rem;
+  }
+}
